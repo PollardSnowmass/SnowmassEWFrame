@@ -22,13 +22,18 @@ int main(int argc, char *argv[]) {
 
     gROOT->ProcessLine(".L LoadVector.h++");
 
-    cout << "Trying to open file " << argv[argc-1] << endl;
+    if (argc != 3) {
+        cout << "Usage: " << argv[0] << " cmnd_or_lhe_file outfile.root" << endl;
+        exit(1);
+    }
+
+    cout << "Trying to open input file " << argv[argc-1] << endl;
 
     TFile *outf = TFile::Open(argv[argc-1], "recreate");
     if (!outf)
         return 0;
 
-    TTree *t = new TTree("SMEWTruthNtup", "SMEWTruthNtup");
+    TTree *t = new TTree("SmEWTruthNtup", "SmEWTruthNtup");
 
     std::vector<TLorentzVector> *tlv_bquarks = new std::vector<TLorentzVector>();
 
