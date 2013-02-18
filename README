@@ -1,0 +1,11 @@
+# Chris Pollard
+# Duke University
+
+This is a small framework for Snowmass 2013 physics feasibility
+    studies.
+See Generator/README for info on generating events with PYTHIA or
+    decaying and showering events from a .lhe file.
+See ObjSelector/README for info on selecting "good" objects from
+    output files from Generator/.
+See EventSelector/README for info on selecting "good" events from
+    output files from ObjSelector/.
