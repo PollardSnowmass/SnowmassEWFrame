@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    TChain *c = new TChain("SMEWTruthNtup");
+    TChain *c = new TChain("SmEWTruthNtup");
     string line;
     vector<string> v;
     int l;
@@ -40,13 +40,10 @@ int main(int argc, char *argv[]) {
         c->AddFile(v.at(i).c_str());
     }
 
-    gROOT->ProcessLine(".L TopAna.cxx+");
-    gROOT->ProcessLine(".L btag_performance.cxx+");
-
-    // instantiate new UpgradeSelector object and loop.
+    // instantiate new ObjSelector object and loop.
     // TSystem *gSystem = new TSystem();
     // TProof::Open(gSystem->GetFromPipe("pod-info -c"));
-    c->Process("UpgradeSelector.cxx+", argv[2]);
+    c->Process("ObjSelector.cxx+", argv[2]);
 
     delete c;
     // delete p;
