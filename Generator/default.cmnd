@@ -1,0 +1,26 @@
+! 2) Settings that are used in the main program.
+Main:numberOfEvents = 100000       ! number of events to generate
+Main:numberToList = 0              ! number of events to print
+Main:timesToShow = 20              ! show how far along run is this many times
+Main:timesAllowErrors = 10         ! abort run after this many flawed events
+Main:showChangedSettings = on      ! print changed flags/modes/parameters
+#Main:showAllSettings = on          ! print all flags/modes/parameters
+#Main:showOneParticleData = 32      ! print data for this particular particle
+#Main:showChangedParticleData = on  ! print changed particle and decay data
+#Main:showChangedResonanceData = on ! also print changed resonance data
+#Main:showAllParticleData = on      ! print all particle and decay data
+#Main:showAllStatistics = on        ! more statistics on multiple interactions
+
+! 4) Switch off some key components of the simulation, for comparisons.
+# PartonLevel:all = off              ! stop after hard process 
+# PartonLevel:MI = off               ! no multiple interactions
+# PartonLevel:ISR = off              ! no initial-state radiation 
+# PartonLevel:FSR = off              ! no final-state radiation
+# HadronLevel:all = off              ! stop after parton level 
+# HadronLevel:Hadronize = off        ! no hadronization
+# HadronLevel:Decay = off            ! no decays
+
+! 5) Any other changes you desire.
+SigmaProcess:alphaSorder = 1
+# PDF:pSet = 3
+SigmaProcess:alphaSvalue = 0.12032

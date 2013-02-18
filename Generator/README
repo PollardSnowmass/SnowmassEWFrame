@@ -1,0 +1,16 @@
+# Chris Pollard
+# Duke University
+
+Requirements:
+Install LHAPDF (http://lhapdf.hepforge.org/).
+Install Pythia8 (http://home.thep.lu.se/~torbjorn/pythiaaux/present.html).
+Install FastJet (http://fastjet.fr)
+Edit "setup.sh" to point to these installations.
+Make sure you have ROOT setup correctly.
+
+Running:
+Setup environment variables ("$ source setup.sh").
+Build ("$ make").
+Run with a particular pythia .cmnd file and save tree to myFile.root ("$ ./run myCard.cmnd myFile.root").
+Run with pre-generated events in a .lhe file and save tree to myFile.root ("$ ./run myEvents.lhe myFile.root").
+To run all .cmnd files in the cmnd directory, run run_all.py ("$ python run_all.py").
