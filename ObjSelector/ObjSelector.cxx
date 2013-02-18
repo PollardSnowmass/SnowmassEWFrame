@@ -21,7 +21,7 @@ void ObjSelector::SlaveBegin(TTree * /*tree*/) {
 
     TString fname = GetOption();
     fout = new TFile(fname, "recreate");
-    tout = new TTree("ttbarntup", "ttbarntup");
+    tout = new TTree("SmEWObjNtup", "SmEWObjNtup");
 
     myRand = new TRandom3();
 
@@ -70,12 +70,6 @@ void ObjSelector::SlaveBegin(TTree * /*tree*/) {
     tout->Branch("mu_pt", &mu_pt_out);
     tout->Branch("mu_E", &mu_E_out);
     tout->Branch("mu_trigger", &mu_trigger_out);
-
-    // truth neutrinos
-    tout->Branch("nu_pt", &nu_pt_out, "nu_pt/F");
-    tout->Branch("nu_eta", &nu_eta_out, "nu_eta/F");
-    tout->Branch("nu_phi", &nu_phi_out, "nu_phi/F");
-    tout->Branch("nu_E", &nu_E_out, "nu_E/F");
 
     // met & sumet
     tout->Branch("met", &met_out, "met/F");
@@ -320,8 +314,6 @@ bool ObjSelector::IsGoodVVJet(int iJet) {
     if (jet_bjet->at(iJet) && jet_pt->at(iJet) > jet_bjet_pt_thresh) {
         btag_eff = 0.0;
         if (dobtag_veto) {
-            // btag_eff = btag_performance(jet_pt->at(iJet)/1000,
-                    // jet_eta->at(iJet), 'B');
             btag_eff = 0.5+0.03*jet_pt->at(iJet)/1000000.0;
             if (abseta > 2.5) btag_eff =- 0.3*abseta;
             if (btag_eff<0.0) btag_eff = 0.0;
@@ -690,26 +682,8 @@ void ObjSelector::Reset() {
     mu_E_out.clear();
     mu_trigger_out.clear();
 
-    m_ll_out = 0;
     met_out = 0;
     met_phi_out = 0;
-
-    nu_pt_out = 0;
-    nu_eta_out = 0;
-    nu_phi_out = 0;
-    nu_E_out = 0;
-
-    ljets_wmass_out = 0;
-    ljets_leptop_mass_out = 0;
-    ljets_lepjet_idx_out = -1;
-    ljets_hadtop_mass_out = 0;
-    ljets_hadjet_idx_out = -1;
-    ljets_mass_out = 0;
-
-    vv_max_dijet_mass_out = 0;
-    vv_leading_dijet_mass_out = 0;
-    vv_leading_dijet_deta_out = 0;
-    vv_4body_mass_out = 0;
 
     truth_mass = 0;
 
