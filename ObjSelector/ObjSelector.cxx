@@ -43,6 +43,8 @@ void ObjSelector::SlaveBegin(TTree * /*tree*/) {
     tout->Branch("jet_vv_pt", &jet_vv_pt_out);
     tout->Branch("jet_vv_E", &jet_vv_E_out);
 
+    tout->Branch("has_bjet", &has_bjet, "has_bjet/I");
+
     // "fat" jets
     tout->Branch("jet_akt10_n", &jet_akt10_n_out, "jet_akt10_n/I");
     tout->Branch("jet_akt10_eta", &jet_akt10_eta_out);
@@ -168,7 +170,7 @@ void ObjSelector::Terminate() {
 
 void ObjSelector::FillGoodElectrons() {
     int iEl;
-    for (int i = 0; i < el_indices->size(); i++) {
+    for (size_t i = 0; i < el_indices->size(); i++) {
         iEl = el_indices->at(i);
         if (IsGoodElectron(iEl)) {
             el_n_out++;
@@ -186,7 +188,7 @@ void ObjSelector::FillGoodElectrons() {
 
 void ObjSelector::FillGoodMuons() {
     int iMu;
-    for (int i = 0; i < mu_indices->size(); i++) {
+    for (size_t i = 0; i < mu_indices->size(); i++) {
         iMu = mu_indices->at(i);
         if (IsGoodMuon(iMu)) {
             mu_n_out++;
@@ -264,7 +266,7 @@ bool ObjSelector::IsGoodElectron(int iEl) {
         return 0;
 
     if (do_reco &&
-            !PassEfficiency(myRand, 0.85-0.191*TMath::Exp(1-mc_pt->at(iEl)/20000.0)))
+            !PassEfficiency(myRand, 0.90-0.2*TMath::Exp(1-mc_pt->at(iEl)/20000.0)))
         return 0;
 
     return 1;
@@ -285,8 +287,8 @@ bool ObjSelector::IsGoodMuon(int iMu) {
     if (mc_pt->at(iMu) < mu_pt_cut)
         return 0;
 
-    float mu_eff = (mu_eff_corr ? sqrt(0.45) : 0.97)
-        - 0.03*mc_pt->at(iMu)/1000000.0;
+    float mu_eff = (mu_eff_corr ? sqrt(0.50) : 0.95)
+        - 0.02*mc_pt->at(iMu)/1000000.0;
 
     if (do_reco && !PassEfficiency(myRand, mu_eff))
         return 0;
@@ -371,15 +373,11 @@ void ObjSelector::FillTrigger()  {
     if (do_reco) {
         for (int iEl = 0; iEl < el_n_out; iEl++) {
             // check if it triggers...
-            el_trigger_out.push_back(PassEfficiency(myRand, 0.88));
+            el_trigger_out.push_back(PassEfficiency(myRand, 0.90));
         }
 
         for (int iMu = 0; iMu < mu_n_out; iMu++) {
-            if (TMath::Abs(mu_eta_out[iMu]) < 1.0) {
-                mu_trigger_out.push_back(PassEfficiency(myRand, 0.64));
-            } else {
-                mu_trigger_out.push_back(PassEfficiency(myRand, 0.86));
-            }
+            mu_trigger_out.push_back(PassEfficiency(myRand, 0.80));
         }
     } else {
         el_trigger_out.resize(el_n_out, 1);
@@ -526,7 +524,7 @@ void ObjSelector::SmearElectrons() {
 
     float smear;
     int iEl;
-    for (int i = 0; i < el_indices->size(); i++) {
+    for (size_t i = 0; i < el_indices->size(); i++) {
         iEl = el_indices->at(i);
         if (mc_status->at(iEl) < 0)
             continue;
@@ -554,7 +552,7 @@ void ObjSelector::SmearMuons() {
     float smear;
     int iMu;
     float q, pt, qbypt, sigma_qbypt;
-    for (int i = 0; i < mu_indices->size(); i++) {
+    for (size_t i = 0; i < mu_indices->size(); i++) {
         iMu = mu_indices->at(i);
         if (mc_status->at(iMu) < 0)
             continue;
