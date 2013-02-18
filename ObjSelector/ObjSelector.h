@@ -13,7 +13,7 @@
 #include <TTree.h>
 #include <TFile.h>
 #include <TSelector.h>
-#include "TRandom3.h"
+#include <TRandom3.h>
 #include <TH1F.h>
 #include <TH2F.h>
 
@@ -130,47 +130,9 @@ class ObjSelector : public TSelector {
         vector<float> mu_E_out;
         vector<int> mu_trigger_out;
 
-        float nu_pt_out;
-        float nu_eta_out;
-        float nu_phi_out;
-        float nu_E_out;
-
-        float sumet_out;
-
-        float m_ll_out;
-        float m_ll01_out;
-        float m_ll02_out;
-        float m_ll03_out;
-        float m_ll12_out;
-        float m_ll13_out;
-        float m_ll23_out;
-        float m_llll_out;
-
         float met_out;
         float met_phi_out;
-
-        float ht_out;
-        float ht_met_out;
-        float ht2j_out;
-        float ht2j_met_out;
-        float ht_lep_out;
-        float ht_lep_met_out;
-
-        int ljets_lepjet_idx_out;
-        float ljets_leptop_mass_out;
-        int ljets_hadjet_idx_out;
-        float ljets_hadtop_mass_out;
-        float ljets_wmass_out;
-        float ljets_mass_out;
-
-        float vv_max_dijet_mass_out;
-        float vv_leading_dijet_mass_out;
-        float vv_leading_dijet_deta_out;
-        float vv_4body_mass_out;
-
-        float wz_m_wz_out;
-        float wz_m_w_out;
-        float wz_m_z_out;
+        float sumet_out;
 
         float truth_mass;
 
