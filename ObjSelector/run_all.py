@@ -26,7 +26,7 @@ def main():
         procs.append(Popen("nice ./run %s %s >& %s" % (fname, rootfname,
             logfname), shell=True))
 
-        sleep(10)
+        sleep(30)
 
 if __name__=='__main__':
     main()
