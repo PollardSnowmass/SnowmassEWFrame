@@ -38,6 +38,8 @@ void EventSelector::SlaveBegin(TTree * /*tree*/) {
     tout->Branch("jet_vv_pt", &jet_vv_pt);
     tout->Branch("jet_vv_E", &jet_vv_E);
 
+    tout->Branch("has_bjet", &has_bjet, "has_bjet/I");
+
     // "fat" jets
     tout->Branch("jet_akt10_n", &jet_akt10_n, "jet_akt10_n/I");
     tout->Branch("jet_akt10_eta", &jet_akt10_eta);
@@ -123,7 +125,14 @@ Bool_t EventSelector::Process(Long64_t entry) {
     FillVVMasses();
     FillHT();
 
-    pass_cuts = 1;
+    bool pass_emu = (el_n == 1 && mu_n == 1);
+    bool pass_opp_charge = pass_emu && (el_charge->at(0)*mu_charge->at(0) < 0);
+    bool pass_trigger = pass_emu && (el_trigger->at(0) || mu_trigger->at(0));
+    bool pass_jet_n = jet_vv_n >= 2;
+    bool pass_met = met > 50000;
+    bool pass_bjet_veto = !has_bjet;
+
+    pass_cuts = pass_emu && pass_opp_charge && pass_trigger && pass_jet_n && pass_met && pass_bjet_veto;
 
     if (pass_cuts)
         tout->Fill();

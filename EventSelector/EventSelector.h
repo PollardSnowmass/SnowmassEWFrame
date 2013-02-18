@@ -63,6 +63,7 @@ class EventSelector : public TSelector {
         Float_t         met_phi;
         Float_t         sumet;
         Float_t         truth_mass;
+        Int_t           has_bjet;
 
         float ht;
         float ht2j;
