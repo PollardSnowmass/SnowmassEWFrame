@@ -20,6 +20,8 @@ bool endsWith (std::string const &fullString, std::string const &ending) {
 
 int main(int argc, char *argv[]) {
 
+    gErrorIgnoreLevel = kError;
+
     gROOT->ProcessLine(".L LoadVector.h++");
 
     if (argc != 3) {
