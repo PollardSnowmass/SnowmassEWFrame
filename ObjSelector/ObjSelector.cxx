@@ -493,7 +493,7 @@ void ObjSelector::JetElOverlap() {
 
     TLorentzVector tlvel, tlvjet;
 
-    float drmin, dr;
+    float dr;
     for (int iJet = 0; iJet < jet_n_out; iJet++) {
         tlvjet.SetPtEtaPhiE(jet_pt_out[iJet], jet_eta_out[iJet], jet_phi_out[iJet], jet_E_out[iJet]);
         for (int iEl = 0; iEl < el_n_out; iEl++) {
