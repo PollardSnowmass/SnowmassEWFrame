@@ -136,6 +136,7 @@ class ObjSelector : public TSelector {
 
         float truth_mass;
 
+        TRandom3 *myRand;
         TFile *fout;
         TTree *tout;
 
@@ -202,7 +203,6 @@ class ObjSelector : public TSelector {
         virtual void    Terminate();
 
         // added by chris.
-        TRandom3 *myRand;
         void Reset();
         void ReadConfig();
         float Smear(TRandom3 *rand1, float width);

@@ -6,7 +6,7 @@ Make sure you have ROOT setup correctly.
 
 Running:
 Build ("$ make")
-Run on an individual file from SnowmassEWFrame/Generator/
+Run on an individual file from SnowmassEWFrame/PythiaRun/
     ("$ ./run infile.root outfile.root")
-Or run on multiple files from SnowmassEWFrame/Generator/
+Or run on multiple files from SnowmassEWFrame/PythiaRun/
     ("$ python run_all.py outfile_dir logfile_dir whitespace [separated infiles]")
